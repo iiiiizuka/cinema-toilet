@@ -3,16 +3,19 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\UseCases\Admin\Cinema\DestroyAction;
 use App\UseCases\Admin\Cinema\IndexAction;
+use App\UseCases\Admin\Cinema\ShowAction;
 use App\UseCases\Admin\Cinema\StoreAction;
+use App\UseCases\Admin\Cinema\UpdateAction;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class CinemaController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 一覧
      */
     public function index(IndexAction $action): View
     {
@@ -23,7 +26,7 @@ class CinemaController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 新規登録画面
      */
     public function create(): View
     {
@@ -31,7 +34,7 @@ class CinemaController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 新規登録処理
      */
     public function store(StoreAction $action, Request $request): RedirectResponse
     {
@@ -41,34 +44,44 @@ class CinemaController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * 詳細画面
      */
-    public function show(string $id)
+    public function show(ShowAction $action, string $id): View
     {
-        //
+        return view(
+            'admin.cinema.show',
+            $action($id),
+        );
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * 更新画面
      */
-    public function edit(string $id)
+    public function edit(EditAction $action, string $id): View
     {
-        //
+        return view(
+            'admin.cinema.edit',
+            $action($id),
+        );
     }
 
     /**
-     * Update the specified resource in storage.
+     * 更新処理
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateAction $action, Request $request, string $id): RedirectResponse
     {
-        //
+        $action($request, $id);
+
+        return redirect()->route('admin.cinema.index');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 削除処理
      */
-    public function destroy(string $id)
+    public function destroy(DestroyAction $action, string $id): RedirectResponse
     {
-        //
+        $action($id);
+
+        return redirect()->route('admin.cinema.index');
     }
 }
