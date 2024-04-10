@@ -9,7 +9,7 @@ class IndexAction
     public function __invoke(): array
     {
         return [
-            'cinemas' => Cinema::all(),
+            'cinemas' => Cinema::with(['theaters', 'prefecture'])->get(),
         ];
     }
 }
