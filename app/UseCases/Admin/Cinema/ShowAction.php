@@ -9,7 +9,7 @@ class ShowAction
     public function __invoke(int $cinem_id): array
     {
         return [
-            'cinema' => Cinema::findOrFail($cinem_id)
+            'cinema' => Cinema::with(['theaters'])->findOrFail($cinem_id)
         ];
     }
 }
