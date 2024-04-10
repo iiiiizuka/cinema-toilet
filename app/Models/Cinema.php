@@ -29,4 +29,15 @@ class Cinema extends Model
     {
         return $this->belongsTo(Prefecture::class);
     }
+
+    protected static function boot(){
+        parent::boot();
+
+        static::deleted(function($cinema)
+        {
+            foreach($cinema->theaters as $theater) {
+                $theater->delete();
+            }
+        });
+    }
 }
