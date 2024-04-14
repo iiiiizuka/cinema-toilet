@@ -12,10 +12,10 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
-Route::prefix('hoge')->name('admin.')->group(function () {
+Route::prefix(config('app.admin_prefix'))->name('admin.')->group(function () {
     Route::get('/', function () {
         return redirect()->route('home.index');
-    });
+    })->name('home');
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
     Route::post('login', [AuthenticatedSessionController::class, 'store']);

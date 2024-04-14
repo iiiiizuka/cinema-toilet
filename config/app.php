@@ -28,6 +28,8 @@ return [
 
     'env' => env('APP_ENV', 'production'),
 
+    'admin_prefix' => env('ADMIN_PREFIX', 'admin'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode
