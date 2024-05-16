@@ -6,10 +6,10 @@ use App\Models\Cinema;
 
 class ShowAction
 {
-    public function __invoke(int $cinem_id): array
+    public function __invoke(int $cinema_id): array
     {
         return [
-            'cinema' => Cinema::with(['theaters', 'prefecture'])->findOrFail($cinem_id)
+            'cinema' => Cinema::with(['theaters', 'prefecture'])->findOrFail($cinema_id)
         ];
     }
 }

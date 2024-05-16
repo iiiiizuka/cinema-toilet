@@ -6,8 +6,8 @@ use App\Models\Cinema;
 
 class DestroyAction
 {
-    public function __invoke(int $cinem_id): bool
+    public function __invoke(int $cinema_id): bool
     {
-        return Cinema::destroy($cinem_id);
+        return Cinema::destroy($cinema_id);
     }
 }
