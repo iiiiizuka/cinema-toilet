@@ -14,6 +14,10 @@ use Illuminate\Http\Request;
 
 class CinemaController extends Controller
 {
+    public function __construct(
+        private StoreAction $store_action
+    ) {}
+
     /**
      * 一覧
      */
@@ -36,9 +40,9 @@ class CinemaController extends Controller
     /**
      * 新規登録処理
      */
-    public function store(StoreAction $action, Request $request): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
-        $action($request);
+        $this->store_action($request);
 
         return redirect()->route('admin.cinema.index');
     }
